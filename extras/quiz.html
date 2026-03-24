@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AYUSH Quiz</title>
+  <style>
+    body {
+      /* font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      text-align: center; */
+      font-family: 'Segoe UI', sans-serif;
+  background: url("../images/quiz.png") no-repeat center center fixed;
+  background-size: cover;
+  color: black;
+  margin: 0;
+  padding: 0;
+    }
+    .banner {
+      /* background: green;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      padding: 35px;
+      letter-spacing: 2px; */
+      color:black;
+      background: rgba(255, 255, 255, 0.482);
+      text-align: center;   /* centers text inside */
+      font-size: 2rem;      /* bigger text */
+      font-weight: bold;    /* optional, makes it look like a heading */
+      margin: 160px 0 15px 0;
+      max-width: 350px;
+      position:relative;
+      left:475px;
+      border-radius: 12px;
+    }
+    .quiz-container {
+      background: rgba(255, 255, 255, 0.482);
+      max-width: 650px;
+      margin: 40px auto;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      text-align: left;
+    }
+    .question {
+      font-size: 22px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    .options button {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: #eeeeeebd;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: left;
+      transition: background 0.2s;
+    }
+    .options button:hover {
+      background: #ddd;
+    }
+    .correct-option {
+      background: #d4edda !important;
+      color: #155724 !important;
+      border-left: 6px solid green;
+    }
+    .wrong-option {
+      background: #f8d7da !important;
+      color: #721c24 !important;
+      border-left: 6px solid red;
+    }
+    .option-icon {
+      float: right;
+      font-weight: bold;
+    }
+    .feedback {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    .correct {
+      color: green;
+    }
+    .wrong {
+      color: red;
+    }
+    .explanation {
+      margin-top: 10px;
+      font-style: italic;
+      color: #333;
+      background: #f9f9f9;
+      padding: 10px;
+      border-left: 4px solid green;
+      border-radius: 5px;
+    }
+    .badge-img {
+      margin-top: 20px;
+      max-width: 150px;
+    }
+    .share {
+      margin-top: 25px;
+    }
+    .share button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.2s;
+      color: white;
+    }
+    .twitter { background: #1DA1F2; }
+    .whatsapp { background: #25D366; }
+    .facebook { background: #4267B2; }
+  </style>
+</head>
+<body>
+
+  <div class="banner">🌿 AYUSH QUIZ 🌿</div>
+
+  <div class="quiz-container" id="quiz"></div>
+
+  <script>
+    const quizData = [
+  {
+    question: "Which Ayurvedic herb is commonly known as 'Indian ginseng' and is used to reduce stress and boost energy?",
+    options: ["Ashwagandha", "Brahmi", "Neem", "Tulsi"],
+    answer: "Ashwagandha",
+    explanation: "Ashwagandha is a powerful adaptogen in Ayurveda, helping the body manage stress. It also improves stamina, immunity, and mental focus naturally."
+  },
+  {
+    question: "Which yoga asana is called the 'king of asanas' due to its multiple benefits?",
+    options: ["Shirshasana (Headstand)", "Bhujangasana", "Vrikshasana", "Padmasana"],
+    answer: "Shirshasana (Headstand)",
+    explanation: "Shirshasana improves blood circulation to the brain, enhances concentration, and strengthens the upper body. It is often considered the king of asanas for its holistic benefits."
+  },
+  {
+    question: "Naturopathy strongly emphasizes the use of which natural element as a healing therapy?",
+    options: ["Water", "Metal", "Plastic", "Salt"],
+    answer: "Water",
+    explanation: "Hydrotherapy, or water therapy, is central to naturopathy. It is used in baths, compresses, and treatments to detoxify and restore body balance."
+  },
+  {
+    question: "Which system of medicine uses 'Ilaj bil Ghiza' (diet therapy) as a principle of treatment?",
+    options: ["Ayurveda", "Unani", "Homeopathy", "Siddha"],
+    answer: "Unani",
+    explanation: "Unani medicine emphasizes diet (Ilaj bil Ghiza) as the first step in healing. It believes proper nutrition can restore balance in the body’s humors (blood, bile, phlegm, black bile)."
+  },
+  {
+    question: "Which Siddha medicine ingredient, known as 'Amukkara', is used for vitality and strength?",
+    options: ["Withania somnifera", "Amla", "Ginger", "Turmeric"],
+    answer: "Withania somnifera",
+    explanation: "Amukkara (Siddha name for Ashwagandha) is widely used to enhance strength, reduce fatigue, and promote longevity in Siddha medicine traditions."
+  },
+  {
+    question: "In Homeopathy, what principle guides the choice of remedies?",
+    options: ["Opposites cure opposites", "Like cures like", "Strong cures weak", "Magic spells"],
+    answer: "Like cures like",
+    explanation: "Homeopathy works on the principle of 'similia similibus curentur' (like cures like). A substance that causes symptoms in a healthy person can cure similar symptoms in a sick person in diluted form."
+  },
+  {
+    question: "Which herb in Ayurveda is often called the 'Queen of herbs' and is used for immunity and respiratory health?",
+    options: ["Tulsi", "Neem", "Brahmi", "Amla"],
+    answer: "Tulsi",
+    explanation: "Tulsi, or Holy Basil, has antibacterial, antiviral, and antioxidant properties. It strengthens immunity and is widely used to treat colds, coughs, and respiratory issues."
+  },
+  {
+    question: "Which yoga practice involves breathing techniques to control life force energy?",
+    options: ["Pranayama", "Surya Namaskar", "Mudra", "Bandha"],
+    answer: "Pranayama",
+    explanation: "Pranayama is the art of controlled breathing that balances the mind and body. It enhances oxygen supply, reduces stress, and improves lung and heart health."
+  },
+  {
+    question: "Which natural treatment in Naturopathy uses earth packs and mud baths?",
+    options: ["Chromotherapy", "Mud therapy", "Ozone therapy", "Steam bath"],
+    answer: "Mud therapy",
+    explanation: "Mud therapy is used to cool, detoxify, and revitalize the body. It draws out toxins, improves digestion, and gives a natural glow to the skin."
+  },
+  {
+    question: "In Unani medicine, which humor is linked with warmth and cheerfulness?",
+    options: ["Blood (Dam)", "Phlegm (Balgham)", "Black bile (Sauda)", "Yellow bile (Safra)"],
+    answer: "Blood (Dam)",
+    explanation: "According to Unani, blood (Dam) is linked with warmth, vitality, and a cheerful nature. Balancing humors is central to maintaining health in this system."
+  },
+  {
+    question: "Which Siddha therapy makes use of specially prepared metals and minerals?",
+    options: ["Maruthuvam", "Thokkanam", "Yoga", "Varmam"],
+    answer: "Maruthuvam",
+    explanation: "Maruthuvam in Siddha medicine includes herbo-mineral preparations. Metals and minerals are purified and processed to provide potent therapeutic benefits."
+  },
+  {
+    question: "Which Homeopathic remedy is often used for common cold and flu symptoms?",
+    options: ["Arsenicum Album", "Nux Vomica", "Belladonna", "Allium Cepa"],
+    answer: "Arsenicum Album",
+    explanation: "Arsenicum Album is widely prescribed in homeopathy for cold, flu, and digestive issues. It also gained attention during the COVID-19 pandemic as an immune support remedy."
+  },
+  {
+    question: "Which Ayurvedic fruit is the richest source of Vitamin C and is a key ingredient in 'Triphala'?",
+    options: ["Amla", "Haritaki", "Bibhitaki", "Mango"],
+    answer: "Amla",
+    explanation: "Amla, also known as Indian gooseberry, is extremely rich in Vitamin C. It rejuvenates tissues, boosts immunity, and promotes healthy digestion."
+  },
+  {
+    question: "Which yoga sequence consists of 12 postures and is often practiced as a warm-up?",
+    options: ["Surya Namaskar", "Chandra Namaskar", "Yoga Mudra", "Kapalbhati"],
+    answer: "Surya Namaskar",
+    explanation: "Surya Namaskar (Sun Salutation) is a dynamic sequence of 12 postures. It improves flexibility, circulation, and balances body and mind when practiced regularly."
+  },
+  {
+    question: "In Naturopathy, which diet is often emphasized for detoxification and natural healing?",
+    options: ["Raw fruits and vegetables", "Processed foods", "Fast foods", "Fried snacks"],
+    answer: "Raw fruits and vegetables",
+    explanation: "Naturopathy encourages consumption of raw fruits and vegetables. Such foods provide enzymes, vitamins, and fiber that aid digestion and detoxification."
+  },
+  {
+    question: "Which Unani treatment method involves the use of massage and physical manipulation?",
+    options: ["Ilaj bil Ghiza", "Ilaj bil Dawa", "Ilaj bil Tadbeer", "Ilaj bil Qat"],
+    answer: "Ilaj bil Tadbeer",
+    explanation: "Ilaj bil Tadbeer in Unani includes regimental therapies such as massage, cupping, and exercise. These practices restore balance and remove toxins from the body."
+  },
+  {
+    question: "Which Siddha practice focuses on pressure points to heal and energize the body?",
+    options: ["Varmam therapy", "Thokkanam", "Maruthuvam", "Yoga"],
+    answer: "Varmam therapy",
+    explanation: "Varmam therapy in Siddha medicine works with vital energy points in the body. Stimulating these points can relieve pain, cure ailments, and enhance energy flow."
+  },
+  {
+    question: "Which Homeopathic remedy, derived from onion, is often used for watery eyes and runny nose?",
+    options: ["Allium Cepa", "Arnica", "Sulphur", "Bryonia"],
+    answer: "Allium Cepa",
+    explanation: "Allium Cepa, made from red onion, is used in homeopathy for colds and allergies. Its symptoms closely mimic those caused by cutting onions, aligning with 'like cures like'."
+  },
+  {
+    question: "Which Ayurvedic preparation, made from three fruits, is considered a powerful rejuvenator?",
+    options: ["Triphala", "Chyawanprash", "Dashmool", "Bhasma"],
+    answer: "Triphala",
+    explanation: "Triphala is a classical Ayurvedic formulation made from Amla, Haritaki, and Bibhitaki. It promotes digestion, detoxifies, and strengthens immunity."
+  },
+  {
+    question: "Which yoga practice focuses on cleansing techniques like Neti and Dhauti?",
+    options: ["Shatkarma", "Asana", "Pratyahara", "Samadhi"],
+    answer: "Shatkarma",
+    explanation: "Shatkarma consists of six yogic cleansing practices. These techniques purify the body and prepare practitioners for deeper stages of yoga and meditation."
+  },
+  {
+    question: "Which naturopathic treatment uses colored light for healing?",
+    options: ["Chromotherapy", "Hydrotherapy", "Mud therapy", "Acupuncture"],
+    answer: "Chromotherapy",
+    explanation: "Chromotherapy uses different colors of light to balance energy in the body. Each color has specific healing effects, helping restore emotional and physical harmony."
+  },
+  {
+    question: "Which Unani herb, also known as 'Sharbat-e-Toot Siyah', is used for throat infections?",
+    options: ["Mulberry", "Amla", "Tulsi", "Licorice"],
+    answer: "Mulberry",
+    explanation: "Sharbat-e-Toot Siyah, made from mulberries, is a common Unani preparation. It soothes sore throats, reduces inflammation, and supports respiratory health."
+  },
+  {
+    question: "Which Siddha therapy emphasizes external oil massage for relaxation and healing?",
+    options: ["Thokkanam", "Maruthuvam", "Varmam", "Yoga"],
+    answer: "Thokkanam",
+    explanation: "Thokkanam is a Siddha therapeutic massage using medicated oils. It improves circulation, relieves pain, and balances the body’s vital energies."
+  },
+  {
+    question: "Which Homeopathic remedy is commonly used for shock, trauma, and bruises?",
+    options: ["Arnica Montana", "Nux Vomica", "Rhus Tox", "Calcarea"],
+    answer: "Arnica Montana",
+    explanation: "Arnica Montana is the most popular homeopathic remedy for injuries, trauma, and bruising. It reduces pain, swelling, and speeds up recovery."
+  }
+];
+
+    let current = 0;
+    let score = 0;
+    let answered = false;
+
+    function loadQuestion() {
+      if (current < quizData.length) {
+        const q = quizData[current];
+        document.getElementById("quiz").innerHTML = `
+          <div class="question">${q.question}</div>
+          <div class="options">
+            ${q.options.map(opt => `
+              <button onclick="checkAnswer(this, '${opt}')">${opt}</button>
+            `).join("")}
+          </div>
+        `;
+        answered = false;
+      } else {
+        showResult();
+      }
+    }
+
+    function checkAnswer(btn, selected) {
+      if (answered) return;
+      answered = true;
+
+      const q = quizData[current];
+      const optionButtons = document.querySelectorAll(".options button");
+
+      optionButtons.forEach(b => {
+        if (b.innerText === q.answer) {
+          b.classList.add("correct-option");
+          b.innerHTML += ` <span class="option-icon">✔️</span>`;
+        }
+        if (b.innerText === selected && selected !== q.answer) {
+          b.classList.add("wrong-option");
+          b.innerHTML += ` <span class="option-icon">❌</span>`;
+        }
+        b.disabled = true;
+      });
+
+      if (selected === q.answer) {
+        score++;
+        document.getElementById("quiz").innerHTML += `<div class="feedback correct">✅ Correct!</div>`;
+      } else {
+        document.getElementById("quiz").innerHTML += `<div class="feedback wrong">❌ Wrong!</div>`;
+      }
+
+      document.getElementById("quiz").innerHTML += `
+        <div class="explanation">
+          ✅ Correct Answer: <b>${q.answer}</b><br>
+          📖 ${q.explanation}
+        </div>
+        <br><button onclick="nextQuestion()">Next</button>
+      `;
+    }
+
+    function nextQuestion() {
+      current++;
+      loadQuestion();
+    }
+
+    function showResult() {
+      let badgeImg = "";
+      let badgeText = "";
+
+      if (score === quizData.length) {
+        badgeImg = "gold.png";
+        badgeText = "🥇 Gold Badge - Excellent!";
+      } else if (score >= quizData.length / 2) {
+        badgeImg = "silver.png";
+        badgeText = "🥈 Silver Badge - Good Job!";
+      } else {
+        badgeImg = "bronze.png";
+        badgeText = "🥉 Bronze Badge - Keep Learning!";
+      }
+
+      document.getElementById("quiz").innerHTML = `
+        <h2>Your Score: ${score}/${quizData.length}</h2>
+        <img src="${badgeImg}" alt="Badge" class="badge-img">
+        <p><b>${badgeText}</b></p>
+        <div class="share">
+          <p>Share your badge:</p>
+          <button class="twitter" onclick="shareBadge('twitter','${badgeText}','${badgeImg}')">Twitter</button>
+          <button class="whatsapp" onclick="shareBadge('whatsapp','${badgeText}','${badgeImg}')">WhatsApp</button>
+          <button class="facebook" onclick="shareBadge('facebook','${badgeText}','${badgeImg}')">Facebook</button>
+        </div>
+      `;
+    }
+
+    function shareBadge(platform, text, img) {
+      const url = "https://your-quiz-link.com"; // replace when hosted
+      const imageUrl = url + "/" + img;
+      let shareUrl = "";
+
+      if (platform === "twitter") {
+        shareUrl = `https://twitter.com/intent/tweet?text=I got a ${text} in AYUSH Quiz! 🌿&url=${imageUrl}`;
+      } else if (platform === "whatsapp") {
+        shareUrl = `https://wa.me/?text=I got a ${text} in AYUSH Quiz! 🌿%0A${imageUrl}`;
+      } else if (platform === "facebook") {
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${imageUrl}&quote=I got a ${text} in AYUSH Quiz! 🌿`;
+      }
+
+      window.open(shareUrl, "_blank");
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>

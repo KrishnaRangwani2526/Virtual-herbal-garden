@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herbal Lab Drag & Drop (Images + Safety)</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("../images/bg.png") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .plant-list {
+      width: 20%;
+      height: 90%;
+      background: rgba(0, 0, 0, 0.199);
+      padding: 1rem;
+      border-radius: 1rem;
+      text-align: center;
+      overflow-y: auto;
+      /* ✅ scroll enabled */
+      scrollbar-width: none;
+      /* ✅ hides scrollbar in Firefox */
+    }
+
+    .plant-list::-webkit-scrollbar {
+      display: none;
+      /* ✅ hides scrollbar in Chrome, Edge, Safari */
+    }
+
+    .plant {
+      margin: 0.5rem 0;
+      cursor: grab;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .plant img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      border: 2px solid #4caf50;
+      transition: all 0.3s ease;
+      /* smooth animation */
+    }
+
+    .plant img:hover {
+      transform: scale(1.1);
+      /* zoom-in */
+      border-color: #ffeb3b;
+      /* yellow glow border */
+      box-shadow: 0 0 15px rgba(255, 235, 59, 0.7);
+      /* glowing shadow */
+    }
+
+    .plant span {
+      margin-top: 0.3rem;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .lab-area {
+      width: 50%;
+      height: 90%;
+      background: rgba(255, 255, 255, 0);
+      color: #222;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      font-size: x-large;
+      font-weight: 400;
+      font-family: 'Times New Roman', Times, serif;
+      padding: 1rem;
+      margin-top: -100px;
+    }
+
+    /* .lab-area h1{
+      text-align: center;
+      font-size:x-large;
+      font-weight: 400;
+      font-family: 'Times New Roman', Times, serif;
+    }*/
+    .lab-area p {
+      position: relative;
+      top: -32px;
+      text-align: center;
+      font-size: x-large;
+      font-weight: bold;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .page-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 150px;
+      /* space between the two buttons */
+      margin: 0 0;
+    }
+
+    .fancy-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #43a047, #66bb6a, #81c784);
+      color: rgb(2, 0, 0);
+      padding: 5px 15px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.3rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 8px 25px rgba(20, 1, 1, 0.158), inset 0 0 10px rgba(255, 255, 255, 0.2);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fancy-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: skewX(-20deg);
+      transition: 0.5s;
+    }
+
+    .fancy-btn:hover::before {
+      left: 100%;
+    }
+
+    .fancy-btn:hover {
+      background: linear-gradient(135deg, #2e7d32, #43a047, #66bb6a);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 0 15px rgba(255, 255, 255, 0.25);
+    }
+
+    .drop-zone {
+      width: 80%;
+      height: 200px;
+      border: 3px dashed #2196f3;
+      border-radius: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1rem;
+      background: rgba(249, 255, 249, 0.455);
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .drop-zone img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin: 0.3rem;
+      border: 2px solid #81c784;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .drop-zone img:hover {
+      transform: scale(1.1);
+      border-color: red;
+    }
+
+    .small-dropzones {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      width: 90%;
+      justify-content: center;
+    }
+
+    .small-dropzone {
+      flex: 1;
+      height: 150px;
+      border: 2px dashed #2196f3;
+      border-radius: 0.5rem;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      color: #fff;
+      font-weight: bold;
+      position: relative;
+    }
+
+    .small-dropzone::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 0.5rem;
+    }
+
+    .small-dropzone span {
+      position: relative;
+      z-index: 2;
+    }
+
+    .mix-btn {
+      padding: 0.8rem 1.5rem;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .result {
+      margin-top: 1rem;
+      font-weight: bold;
+      min-height: 24px;
+      transition: all 0.3s ease-in-out;
+    }
+  
+    .notepad-icon {
+      position: fixed;
+      bottom: 20px;
+      left: 760px;
+      width: 50px;
+      /* adjust size */
+      height: 50px;
+      z-index: 1000;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .notepad-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .notepad-icon:hover {
+      transform: scale(1.1);
+    }
+
+    /* Social Media Share Icon Bottom-Left */
+    .share-icon {
+      position: fixed;
+      bottom: 20px;
+      left: 480px;
+      /* placed after Virtual Lab */
+      width: 50px;
+      height: 50px;
+      z-index: 1000;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .share-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .share-icon:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Left Plant List -->
+  <div class="plant-list" id="leftList">
+    <h3>🌿 Plants</h3>
+    <div class="plant" draggable="true" data-name="Tulsi">
+      <img src="../images/tulsi.jpeg" alt="Tulsi"><span>Tulsi</span>
+    </div>
+    <div class="plant" draggable="true" data-name="Ginger">
+      <img src="../images/ginger.webp" alt="Ginger"><span>Ginger</span>
+    </div>
+    <div class="plant" draggable="true" data-name="Neem">
+      <img src="../images/neem.jpg" alt="Neem"><span>Neem</span>
+    </div>
+    <div class="plant" draggable="true" data-name="Aloe Vera">
+      <img src="../images/aloVera.webp" alt="Aloe Vera"><span>Aloe Vera</span>
+    </div>
+    <div class="plant" draggable="true" data-name="Ashwagandha">
+      <img src="../images/ashwagandha.jpg" alt="Ashwagandha"><span>Ashwagandha</span>
+    </div>
+  </div>
+
+  <!-- Lab Area -->
+  <div class="lab-area">
+    <h1>🧪Herbal Lab</h1>
+    <p>Drag plants here to mix them.</p>
+    <div class="drop-zone" id="dropZone"></div>
+
+    <div class="page-buttons">
+      <button class="fancy-btn" id="mixBtn">Mix Plants</button>
+    </div>
+    <div class="result" id="result"></div>
+
+    <div class="small-dropzones">
+      <div class="small-dropzone" id="microscope" style="background-image:url('../images/medical.png')">
+        <span>🔬 Cellular Study</span>
+      </div>
+      <div class="small-dropzone" id="medicalUses" style="background-image:url('../images/medicaluse.png')">
+        <span>💊 Medical Uses</span>
+      </div>
+    </div>
+    <a href="notepade.html" class="notepad-icon" title="Open Notepad">
+      <img src="../icons/notepad.png" alt="Notepad">
+    </a>
+    <!-- Social Media Share Icon -->
+    <a href="extras/blogpage.html" class="share-icon" title="Share">
+      <img src="icons/share.png" alt="Share">
+    </a>
+    
+  </div>
+
+  <!-- Right Plant List -->
+  <div class="plant-list" id="rightList">
+    <h3>🌿 Plants</h3>
+    <div class="plant" draggable="true" data-name="Lemon">
+      <img src="../images/lemon.jpg" alt="Lemon"><span>Lemon</span>
+    </div>
+    <div class="plant" draggable="true" data-name="Garlic">
+      <img src="../images/garlic.jpg" alt="Garlic"><span>Garlic</span>
+    </div>
+    <div class="plant" draggable="true" data-name="Mint">
+      <img src="../images/mint.jpg" alt="Mint"><span>Mint</span>
+    </div>
+    <div class="plant" draggable="true" data-name="Cinnamon">
+      <img src="../images/Cinnamon.webp" alt="Cinnamon"><span>Cinnamon</span>
+    </div>
+    <div class="plant" draggable="true" data-name="Clove">
+      <img src="../images/clove.jpg" alt="Clove"><span>Clove</span>
+    </div>
+  </div>
+
+  <script>
+    const plants = document.querySelectorAll(".plant");
+    const dropZone = document.getElementById("dropZone");
+    const mixBtn = document.getElementById("mixBtn");
+    const result = document.getElementById("result");
+    const microscope = document.getElementById("microscope");
+    const medicalUses = document.getElementById("medicalUses");
+
+    let droppedPlants = [];
+
+    const medicalDatabase = {
+      "Tulsi": "Boosts immunity, relieves stress, helps in cold and cough.",
+      "Ginger": "Improves digestion, reduces nausea, anti-inflammatory.",
+      "Neem": "Purifies blood, good for skin diseases, antifungal.",
+      "Aloe Vera": "Soothes burns, aids digestion, hydrates skin.",
+      "Ashwagandha": "Reduces stress, boosts strength, improves sleep.",
+      "Lemon": "Rich in Vitamin C, detoxifies body, aids digestion.",
+      "Garlic": "Boosts heart health, lowers cholesterol, antibacterial.",
+      "Mint": "Soothes stomach, relieves headaches, freshens breath.",
+      "Cinnamon": "Controls blood sugar, anti-inflammatory, antioxidant.",
+      "Clove": "Relieves toothache, improves digestion, antibacterial."
+    };
+
+    const harmfulCombos = {
+      "Neem+Aloe Vera+Garlic": "⚠ This mix can cause stomach irritation if consumed!",
+      "Cinnamon+Clove": "⚠ Too strong together, can cause mouth/throat irritation!"
+    };
+
+    const usefulCombos = {
+      "Tulsi+Ginger": "🍵 Great for immunity, cold & cough relief.",
+      "Neem+Aloe Vera": "🌿 Excellent for skin healing.",
+      "Garlic+Ginger": "🧄 Supports heart health.",
+      "Lemon+Mint": "🍋 Refreshing digestive drink."
+    };
+
+    plants.forEach(plant => {
+      plant.addEventListener("dragstart", e => {
+        e.dataTransfer.setData("text/plain", plant.dataset.name);
+        e.dataTransfer.setData("image", plant.querySelector("img").src);
+      });
+    });
+
+    dropZone.addEventListener("dragover", e => e.preventDefault());
+    microscope.addEventListener("dragover", e => e.preventDefault());
+    medicalUses.addEventListener("dragover", e => e.preventDefault());
+
+    dropZone.addEventListener("drop", e => {
+      e.preventDefault();
+      const plantName = e.dataTransfer.getData("text/plain");
+      const imgSrc = e.dataTransfer.getData("image");
+
+      if (!droppedPlants.includes(plantName)) {
+        droppedPlants.push(plantName);
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.alt = plantName;
+        img.title = "Click to remove";
+        img.addEventListener("click", () => {
+          dropZone.removeChild(img);
+          droppedPlants = droppedPlants.filter(p => p !== plantName);
+        });
+        dropZone.appendChild(img);
+      }
+    });
+
+    microscope.addEventListener("drop", e => {
+      e.preventDefault();
+      const plantName = e.dataTransfer.getData("text/plain");
+      window.open(`${plantName.toLowerCase()}.html`, "_blank");
+    });
+
+    medicalUses.addEventListener("drop", e => {
+      e.preventDefault();
+      const plantName = e.dataTransfer.getData("text/plain");
+      medicalUses.querySelector("span").textContent =
+        `💊 ${plantName}: ${medicalDatabase[plantName] || "No data available."}`;
+    });
+
+
+    mixBtn.addEventListener("click", () => {
+      if (droppedPlants.length < 2) {
+        result.textContent = "⚠ Add at least 2 plants!";
+        result.style.color = "red";
+        return;
+      }
+
+      let combo = droppedPlants.sort().join("+");
+      let message = "✨ " + combo.replace(/\+/g, " + ") + " = Experimental mix!";
+      let color = "black";
+
+      for (let harmful in harmfulCombos) {
+        let parts = harmful.split("+");
+        if (parts.every(p => droppedPlants.includes(p))) {
+          message = harmfulCombos[harmful];
+          color = "red";
+        }
+      }
+
+      for (let useful in usefulCombos) {
+        let parts = useful.split("+");
+        if (parts.every(p => droppedPlants.includes(p))) {
+          message = "✅ Useful Combo: " + usefulCombos[useful];
+          color = "black";
+          background = "rgba(0,0,0,0.9)";
+        }
+      }
+
+      result.textContent = message;
+      result.style.color = color;
+    });
+  </script>
+</body>
+
+</html>

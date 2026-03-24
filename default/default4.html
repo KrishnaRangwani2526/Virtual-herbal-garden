@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Default Page</title>
+<style>
+  * {
+    margin: 2;
+    padding: 5;
+    box-sizing: border-box;
+  }
+
+  body, html {
+    width: 98%;
+    height: 95%;
+    font-family: Arial, sans-serif;
+    background-color: #f7ebd1;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+  }
+
+  /* Upper half with image */
+  .upper-half {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* image sticks to top */
+    padding: 10;
+  }
+
+  .upper-half img {
+    width: 95%;
+    max-height: 33vh; /* image takes max half of viewport */
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+
+  /* Lower half with text */
+  .lower-half {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* stick text to top */
+    padding: 0;
+    flex: 1; /* remaining space is for text box */
+  }
+
+  .text-box {
+    width: 95%;
+    height: 100%;
+    background-color: rgba(254, 255, 235, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .text-box {
+      font-size: 1.1rem;
+      padding: 12px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .upper-half img {
+      max-height: 40vh;
+    }
+    .text-box {
+      height: 70%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Upper half with image -->
+  <div class="upper-half">
+    <img src="../images/default4.png" alt="Upper Image">
+  </div>
+
+  <!-- Lower half with text -->
+  <div class="lower-half">
+    <div class="text-box">
+      <h2>Welcome to the virtual garden </h2>
+      <p>Unani Medicine, one of the oldest systems of traditional healthcare under AYUSH, is based on the philosophy that good health depends on the balance of four vital humors in the body – blood, phlegm, yellow bile, and black bile. Originating from ancient Greek traditions and later enriched by Arab and Persian scholars, Unani has flourished in India for centuries as a holistic system of healing. The practice emphasizes the importance of lifestyle management, proper diet, physical activity, and natural remedies for maintaining harmony within the body and preventing disease. Herbs, oils, spices, and plant-based formulations form the core of Unani treatments, often prepared in the form of syrups, powders, ointments, and decoctions. The image reflects this essence with ingredients like ginger, cinnamon, star anise, and medicinal extracts, which symbolize the natural approach of Unani in treating common ailments as well as chronic conditions. Unlike modern medicine that often targets symptoms, Unani seeks to identify and correct the underlying imbalance, making it both preventive and curative. Today, Unani medicine continues to be practiced widely in India and across the world, offering a safe, sustainable, and personalized system of healthcare that bridges ancient wisdom with modern needs.
+
+
+
+.</p>
+      <p></p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

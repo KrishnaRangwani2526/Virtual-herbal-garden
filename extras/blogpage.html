@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Blog</title>
+  <style>
+    body {
+      /* font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333; */
+      font-family: 'Segoe UI', sans-serif;
+  background: url("../images/blogPage.png") no-repeat center center fixed;
+  background-size: cover;
+  color: black;
+  margin: 0;
+  padding: 0;
+    }
+
+
+    /* header {
+      background: #007bff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    } */
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    p{
+      color: white;
+    }
+    h1, h2 {
+      margin-bottom: 15px;
+      position:relative;
+      align-items: center;
+      text-align: center;
+      color:white;
+    }
+
+    .blog-form {
+      background: #ffffff53;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .blog-form input,
+    .blog-form textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      box-sizing: border-box; /* Fixes overflow issue */
+    }
+
+    .blog-form textarea {
+      resize: none;
+      min-height: 100px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .blog-form button {
+      background: #578167c2;
+      color: rgb(255, 255, 255);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      display: block;
+      margin: 10px auto; 
+    }
+
+    .blog-form button:hover {
+      background: #95c9bbcb;
+    }
+
+    .post {
+      background: rgba(255, 255, 255, 0.721);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+
+    .post h3 {
+      margin-top: 0;
+      color: #010f1c;
+    }
+
+    .post p {
+      line-height: 1.6;
+       color: #010f1c;
+    }
+
+    .post small {
+      display: block;
+      margin-top: 10px;
+      color: #5f5d5d;
+    }
+    .share-buttons {
+      margin-top: 15px;
+    }
+    .share-buttons a {
+      text-decoration: none;
+      padding: 8px 12px;
+      margin-right: 8px;
+      border-radius: 5px;
+      font-size: 14px;
+      color: white;
+    }
+    .twitter { background: #1da1f2; }
+    .facebook { background: #3b5998; }
+    .linkedin { background: #0077b5; }
+    .whatsapp { background: #25d366; }
+    .share-buttons a:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+
+
+  <div class="container">
+     <h1>Community Blog</h1>
+    <p>Share your thoughts, research, and findings ✨</p>
+    <!-- Post Form -->
+    <div class="blog-form">
+      <h2>Write a Post</h2>
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="text" id="title" placeholder="Post Title" required>
+      <textarea id="content" placeholder="Write your thoughts..." required></textarea>
+      <button id="publishBtn">Publish</button>
+    </div>
+
+    <h2>All Posts</h2>
+    <div id="posts"></div>
+  </div>
+
+  <script>
+    const publishBtn = document.getElementById("publishBtn");
+    const postsDiv = document.getElementById("posts");
+
+    publishBtn.addEventListener("click", () => {
+      const name = document.getElementById("name").value.trim();
+      const title = document.getElementById("title").value.trim();
+      const content = document.getElementById("content").value.trim();
+
+      if (!name || !title || !content) {
+        alert("Please fill in all fields!");
+        return;
+      }
+
+      // Create new post
+      const post = document.createElement("div");
+      post.classList.add("post");
+      post.innerHTML = `
+        <h3>${title}</h3>
+        <p>${content}</p>
+        <small>— by ${name}, ${new Date().toLocaleDateString()}</small>
+        <div class="share-buttons">
+        <a class="twitter" href="https://twitter.com/intent/tweet?url=https://yourwebsite.com/blog/climate-research&text=Check+out+this+blog+post!" target="_blank">Twitter</a>
+        <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com/blog/climate-research" target="_blank">Facebook</a>
+        <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourwebsite.com/blog/climate-research&title=Climate+Research" target="_blank">LinkedIn</a>
+        <a class="whatsapp" href="https://api.whatsapp.com/send?text=Check+out+this+blog:+https://yourwebsite.com/blog/climate-research" target="_blank">WhatsApp</a>
+      </div>
+      `;
+
+      // Add new post at the top
+      postsDiv.prepend(post);
+
+      // Clear form
+      document.getElementById("name").value = "";
+      document.getElementById("title").value = "";
+      document.getElementById("content").value = "";
+    });
+  </script>
+
+</body>
+</html>

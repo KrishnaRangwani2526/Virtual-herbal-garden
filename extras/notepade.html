@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garden Notepad 🌱</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #a8e6cf, #dcedc1);
+      margin: 0;
+      padding: 0;
+      color: #2e4600;
+      margin: 0;
+      padding:0;
+      font-family: Arial, sans-serif;
+      background: url("../images/notepad.png") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100vh;
+    }
+    body h1{
+      position:relative;
+      align-items: center;
+      text-align: center;
+      color:#2e4600;
+    }
+
+    /* header {
+      text-align: center;
+      background: #588c7e;
+      color: white;
+      padding: 20px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    } */
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #f0f4c388;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+    }
+
+    input, textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 2px solid #8bc34a;
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #558b2f;
+      background: #f1f8e9;
+    }
+
+    button {
+      background: #558b2f;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 10px;
+      display: block;
+      margin: 10px auto; 
+    }
+
+    button:hover {
+      background: #33691e;
+    }
+
+    .note {
+      background: #fffde7;
+      border-left: 6px solid #8bc34a;
+      margin: 12px 0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      color: #000;
+    }
+
+
+    .delete-btn {
+      background: #d32f2f;
+      margin-top: 5px;
+    }
+
+    .delete-btn:hover {
+      background: #b71c1c;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <h1>🌿 Garden Notepad</h1>
+    <h2>Add Plant Note</h2>
+    <input type="text" id="plantName" placeholder="Plant Name (e.g., Tulsi)">
+    <textarea id="plantDetails" rows="4" placeholder="Details about the plant..."></textarea>
+    <button onclick="addNote()">Save Note</button>
+
+    <h2>Saved Plants</h2>
+    <div id="notesContainer"></div>
+  </div>
+
+  <script>
+    function loadNotes() {
+      const notes = JSON.parse(localStorage.getItem("plantNotes")) || [];
+      const container = document.getElementById("notesContainer");
+      container.innerHTML = "";
+      notes.forEach((note, index) => {
+        container.innerHTML += `
+          <div class="note">
+            <h3>${note.name}</h3>
+            <p>${note.details}</p>
+            <button class="delete-btn" onclick="deleteNote(${index})">Delete</button>
+          </div>
+        `;
+      });
+    }
+
+    function addNote() {
+      const name = document.getElementById("plantName").value;
+      const details = document.getElementById("plantDetails").value;
+
+      if (!name || !details) {
+        alert("Please fill in both fields!");
+        return;
+      }
+
+      const notes = JSON.parse(localStorage.getItem("plantNotes")) || [];
+      notes.push({ name, details });
+      localStorage.setItem("plantNotes", JSON.stringify(notes));
+
+      document.getElementById("plantName").value = "";
+      document.getElementById("plantDetails").value = "";
+
+      loadNotes();
+    }
+
+    function deleteNote(index) {
+      const notes = JSON.parse(localStorage.getItem("plantNotes")) || [];
+      notes.splice(index, 1);
+      localStorage.setItem("plantNotes", JSON.stringify(notes));
+      loadNotes();
+    }
+
+    window.onload = loadNotes;
+  </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Split Screen Webpage with Smooth Slide Iframe</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+  }
+
+  .container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
+
+  /* LEFT SIDE */
+  .left {
+  width: 45%;
+  position: relative;
+  background: url('../images/ayurveda.png') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  padding-left: 30px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+/* container for img + text */
+.img-box {
+  position: absolute; /* so we can move each box like your images */
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 6px black;
+}
+
+.img-box img {
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.img-box img:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Position each img+text */
+.img-box:nth-child(1) { top: 380px; left: 50px; }
+.img-box:nth-child(2) { top: 130px; right: 100px; }
+.img-box:nth-child(3) { bottom: 130px; left: 150px; }
+.img-box:nth-child(4) { bottom: 50px; right: 50px; }
+.img-box:nth-child(5) { top: 200px; left: 40%; }
+
+/* text position (below the image) */
+.img-text {
+  display: block;
+  margin-top: 8px;
+  font-size: 16px;
+  color: white;
+}
+
+
+  /* RIGHT SIDE */
+  .right {
+    width: 55%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  iframe.active {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  /* RESPONSIVE */
+  @media(max-width: 900px) {
+    .container {
+      flex-direction: column;
+    }
+    .left, .right {
+      width: 100%;
+      height: 50vh;
+    }
+    iframe {
+      transform: translateY(100%);
+    }
+    iframe.active {
+      transform: translateY(0);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- LEFT SIDE -->
+  <div class="left">
+  <div class="img-box">
+    <img src="../images/ashwa.png" alt="Page 1" onclick="loadPage('plants/ashwagandha_page.html', this)">
+    <span class="img-text">Ashwagandha</span>
+  </div>
+
+  <div class="img-box">
+    <img src="../images/turmeric.png" alt="Page 2" onclick="loadPage('plants/turmeric_page.html', this)">
+    <span class="img-text">Turmeric</span>
+  </div>
+
+  <div class="img-box">
+    <img src="../images/tulsi.png" alt="Page 3" onclick="loadPage('plants/tulsi_page.html', this)">
+    <span class="img-text">Tulsi</span>
+  </div>
+</div>
+
+
+  <!-- RIGHT SIDE -->
+  <div class="right">
+    <iframe id="rightFrame" src="../default/default3.html" class="active"></iframe>
+  </div>
+</div>
+
+<script>  
+  const buttons = document.querySelectorAll('.left img');
+  const iframe = document.getElementById('rightFrame');
+
+  function loadPage(url, btn) {
+    // Highlight clicked button
+    buttons.forEach(b => b.style.boxShadow = '');
+    btn.style.boxShadow = '0 0 15px 5px rgba(255,255,0,0.7)';
+
+    // Slide out iframe
+    iframe.classList.remove('active');
+
+    // Change iframe src after short delay, then slide in smoothly
+    setTimeout(() => {
+      iframe.src = url;
+      iframe.classList.add('active');
+    }, 300); 
+  }
+</script>
+
+</body>
+</html>

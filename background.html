@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Garden</title>
+<!-- Zapier Web Component Script -->
+<script async type="module" src="https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js"></script>
+<style>
+  /* Body and background */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: url("images/unnamed (19).png") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Center container */
+  .center-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .center-container img.main {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Logo top-left */
+  .logo-box {
+    position: absolute;
+    top: 20%;
+    left: 2%;
+    width: 20%;
+    height: auto;
+    z-index: 10;
+  }
+
+  .logo-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+/* Portal Logo Box with Curves, Blur, and Shadow */
+.portal-box {
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  width: 20%;
+  height: auto;
+  z-index: 10;
+  border-radius: 20px;            /* smooth curves */
+  overflow: hidden;               /* ensures image stays inside curves */
+  
+  /* Shadow and glow */
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.4),   /* main shadow */
+    0 0 15px rgba(255, 255, 255, 0.2); /* subtle outer glow */
+
+  /* Optional background blur effect */
+  backdrop-filter: blur(5px);    /* blurs whatever is behind the box */
+  -webkit-backdrop-filter: blur(5px); /* for Safari */
+  border: 1px solid rgba(255,255,255,0.3); /* faint border */
+}
+
+.portal-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;            /* matches the parent curvature */
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); /* extra depth */
+}
+
+  /* Search bar top-right */
+  .search-box {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 5px 10px;
+    z-index: 10;
+  }
+
+  .search-box input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 4px 0 0 4px;
+    width: 150px;
+  }
+
+  .search-box button {
+    border: none;
+    background: #033691;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    font-size: 1rem;
+  }
+
+  .search-box button:hover {
+    background: #021e50;
+  }
+
+  /* Overlay images */
+  .overlay-container {
+    position: absolute;
+    cursor: pointer;
+    transform-origin: top left;
+    transition: transform 0.3s ease;
+  }
+
+  .overlay-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .overlay-container:hover {
+    transform: scale(1.05);
+  }
+
+  .overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2vw;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .overlay-container:hover .overlay-text::after {
+    content: attr(data-full);
+  }
+
+  .overlay-container .overlay-text::after {
+    content: attr(data-short);
+  }
+
+
+  /* Shopping Cart Icon top-right */
+.shopping-cart {
+  position: absolute; /* or fixed if you want it floating */
+  top: 2%;           /* same as search box */
+  right: 10%;        /* adjust spacing from right */
+  width: 40px;
+  height: 40px;
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.shopping-cart img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.shopping-cart:hover {
+  transform: scale(1.1);
+}
+
+  /* Overlay positions relative to base image */
+  .img1 { top: 8%; left: 25%; width: 14%; }
+  .img2 { top: 7%; left: 64%; width: 12%; }
+  .img3 { top: 60%; left: 23%; width: 16%; }
+  .img4 { top: 58%; left: 63%; width: 15%; }
+  .img5 { top: 5%; left: 44%; width: 14%; }
+
+  /* Chatbot floating on right side */
+  .chatbot-container {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 1000;
+  }
+
+  /* Notepad icon bottom-left */
+.notepad-icon {
+  position: fixed;
+  bottom: 20px;
+  left: 80px;
+  width: 50px;       /* adjust size */
+  height: 50px;
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.notepad-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.notepad-icon:hover {
+  transform: scale(1.1);
+}
+/* Shopping Cart Icon Bottom-Left */
+.shopping-cart-icon {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;  /* next to notepad */
+  width: 50px;
+  height: 50px;
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.shopping-cart-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.shopping-cart-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Chatbot Icon Bottom-Right */
+.chatbot-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 80px;
+  width: 70px;
+  height: 70px;
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.chatbot-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.chatbot-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Quiz Icon Bottom-Left */
+.quiz-icon {
+  position: fixed;
+  bottom: 20px;
+  left: 140px;   /* placed next to Notepad */
+  width: 50px;
+  height: 50px;
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.quiz-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.quiz-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Virtual Lab Icon Bottom-Left */
+.lab-icon {
+  position: fixed;
+  bottom: 20px;
+  left: 200px;   /* placed after Quiz */
+  width: 50px;
+  height: 50px;
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.lab-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.lab-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Social Media Share Icon Bottom-Left */
+.share-icon {
+  position: fixed;
+  bottom: 20px;
+  left: 260px;   /* placed after Virtual Lab */
+  width: 50px;
+  height: 50px;
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.share-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.share-icon:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .search-box input {
+      width: 100px;
+    }
+    .overlay-text {
+      font-size: 3vw;
+    }
+    .logo-box {
+      width: 25%;
+    }
+  }
+</style>
+</head>
+<body>
+<a href="https://www.amazon.in/" class="shopping-cart-icon" target="_blank" title="Go to Shop">
+  <img src="icons/cart.png" alt="Shopping Cart">
+</a>
+
+<!-- Chatbot Icon Bottom-Right -->
+<a href="https://aayush-eaeafd.zapier.app/" class="chatbot-icon" title="Chat with us">
+  <img src="icons/chatbot.png" alt="Chatbot">
+</a>
+    
+
+    <!-- Notepad Icon Bottom-Left -->
+<a href="extras/notepade.html" class="notepad-icon" title="Open Notepad">
+  <img src="icons/notepad.png" alt="Notepad">
+</a>
+
+  <div class="center-container">
+    <!-- Base Image -->
+    <img src="images/base4.png" alt="Center Image" class="main">
+
+    <!-- Logo top-left -->
+    <div class="portal-box">
+      <img src="icons/portal.jpg" alt="portal">
+    </div>
+
+    <div class="logo-box">
+      <img src="icons/logo.png" alt="Logo">
+    </div>
+    <!-- Search bar top-right -->
+    <div class="search-box">
+      <input type="text" placeholder="Search...">
+      <button>🔍</button>
+    </div>
+
+    <!-- Overlay images -->
+    <a href="wallPages/wall.html" class="overlay-container img1">
+      <img src="images/barrack3.png" alt="Ayurveda">
+      <div class="overlay-text" data-short="A" data-full="AYURVEDA"></div>
+    </a>
+
+    <a href="wallPages/wall2.html" class="overlay-container img2">
+      <img src="images/barrack2.png" alt="Unani">
+      <div class="overlay-text" data-short="U" data-full="UNANI"></div>
+    </a>
+
+    <a href="wallPages/wall3.html" class="overlay-container img3">
+      <img src="images/barrack5.png" alt="Homeopathy">
+      <div class="overlay-text" data-short="H" data-full="HOMEOPATHY"></div>
+    </a>
+
+    <a href="wallPages/wall4.html" class="overlay-container img4">
+      <img src="images/barrack1.png" alt="Siddha">
+      <div class="overlay-text" data-short="S" data-full="SIDDHA"></div>
+    </a>
+
+    <a href="wallPages/wall5.html" class="overlay-container img5">
+      <img src="images/barrack4.png" alt="Yoga">
+      <div class="overlay-text" data-short="Y" data-full="YOGA AND NATUROPATHY"></div>
+    </a>
+    <!-- QUIZ Icon -->
+  <a href="extras/quiz.html" class="quiz-icon" title="Take Quiz">
+  <img src="icons/speech-bubble.png" alt="Quiz">
+</a>
+
+<!-- Virtual Lab Icon -->
+<a href="extras/lab.html" class="lab-icon" title="Virtual Lab">
+  <img src="icons/imaging.png" alt="Virtual Lab">
+</a>
+<!-- Social Media Share Icon -->
+<a href="extras/blogpage.html" class="share-icon" title="Share">
+  <img src="icons/share.png" alt="Share">
+</a>
+
+
+  </div>
+
+ <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+<zapier-interfaces-chatbot-embed is-popup='true' chatbot-id='cmf19rg7c0019ddn51wn30bcf'></zapier-interfaces-chatbot-embed>
+</body>
+</html>

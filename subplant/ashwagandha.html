@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <title>Ashwagandha</title>
+  <style>
+    /* 🌿 Classy Herbal Garden Styles 🌿 */
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ------------------- Reset & Base ------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f3f9f4, #fdfdfd);
+      color: #333;
+      line-height: 1.7;
+    }
+
+    /* ------------------- Header ------------------- */
+    header {
+      background: linear-gradient(90deg, #2c6e49, #4caf50);
+      color: white;
+      padding: 25px 0;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ------------------- Plant Display ------------------- */
+    .plant-display {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 30px;
+      margin: 0 auto;
+    }
+
+    /* 3D Model */
+    .plant-3d {
+      flex: 0 0 45%;
+      min-width: 300px;
+      padding: 20px;
+      border-radius: 20px;
+      background: #ffffff;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      transition: transform 0.3s;
+    }
+
+    .plant-3d:hover {
+      transform: scale(1.02);
+    }
+
+    .plant-3d model-viewer {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+    }
+
+    /* Info Card */
+    .plant-info {
+      flex: 0 0 45%;
+      min-width: 300px;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      transition: transform 0.3s;
+    }
+
+    .plant-info:hover {
+      transform: translateY(-5px);
+    }
+
+    .plant-info h2 {
+      margin-bottom: 20px;
+      color: #2c6e49;
+      border-left: 5px solid #4CAF50;
+      padding-left: 10px;
+    }
+
+    .plant-info p {
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    .plant-info img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-top: 20px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ------------------- Parts Images ------------------- */
+    .plant-parts {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .plant-parts h3 {
+      color: #2c6e49;
+      font-size: 1.6rem;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .plant-parts h3::after {
+      content: "";
+      display: block;
+      width: 50%;
+      height: 3px;
+      background: #4CAF50;
+      margin: 8px auto 0;
+      border-radius: 3px;
+    }
+
+    .parts-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 70px;
+      justify-content: center;
+    }
+
+    .parts-images a img {
+      width: 230px;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      transition: transform 0.4s, box-shadow 0.4s;
+      cursor: pointer;
+    }
+
+    .parts-images a img:hover {
+      transform: scale(1.50);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ------------------- Detailed Display ------------------- */
+    .detailed-display {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding: 30px;
+      margin: 0 auto;
+      max-width: 1300px;
+    }
+
+    /* Individual Sections */
+    .root,
+    .leaf,
+    .berry {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .root-img,
+    .leaf-img,
+    .berry-img {
+      flex: 0 0 30%;
+      min-width: 300px;
+      padding: 10px;
+    }
+    .leaf-img,.berry-img,.root-img img:nth-child(2) {
+  position: relative;
+  top: 50px;
+
+}
+
+    .root-img img,
+    .leaf-img img,
+    .berry-img img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      margin-bottom: 15px;
+    }
+
+    .root-info,
+    .leaf-info,
+    .berry-info {
+      flex: 0 0 60%;
+      min-width: 300px;
+      padding: 20px;
+    }
+
+    .root-info h2,
+    .leaf-info h2,
+    .berry-info h2 {
+      margin-bottom: 15px;
+      color: #2c6e49;
+      border-bottom: 2px solid #4CAF50;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .root-info h3,
+    .leaf-info h3,
+    .berry-info h3 {
+      margin: 15px 0 8px;
+      color: #4CAF50;
+      font-size: 1.2rem;
+    }
+
+    .root-info p,
+    .leaf-info p,
+    .berry-info p,
+    .root-info ul,
+    .leaf-info ul,
+    .berry-info ul {
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    ul {
+      padding-left: 20px;
+      list-style-type: "🌱 ";
+    }
+
+    .page-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 150px;
+      /* space between the two buttons */
+      margin: 40px 0;
+    }
+
+    .fancy-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #43a047, #66bb6a, #81c784);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.3rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), inset 0 0 10px rgba(255, 255, 255, 0.2);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .fancy-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: skewX(-20deg);
+      transition: 0.5s;
+    }
+
+    .fancy-btn:hover::before {
+      left: 100%;
+    }
+
+    .fancy-btn:hover {
+      background: linear-gradient(135deg, #2e7d32, #43a047, #66bb6a);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 0 15px rgba(255, 255, 255, 0.25);
+    }
+
+
+
+    /* ------------------- Responsive ------------------- */
+    @media (max-width: 900px) {
+      .plant-display {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .plant-3d,
+      .plant-info {
+        flex: 0 0 90%;
+        margin-bottom: 20px;
+      }
+
+      .root,
+      .leaf,
+      .berry {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .root-img img,
+      .leaf-img img,
+      .berry-img img {
+        height: 300px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Ashwagandha</h1>
+  </header>
+
+  <main>
+    <!-- Plant Display -->
+    <div class="plant-display">
+      <div class="plant-3d">
+        <model-viewer src="../images/Ahwagandha.glb" alt="3D model of Ashwagandha" auto-rotate camera-controls ar>
+        </model-viewer>
+      </div>
+
+      <div class="plant-info">
+        <p><strong>Scientific Name:</strong> Withania somnifera</p>
+        <p><strong>Common Names:</strong> Indian Ginseng, Winter Cherry</p>
+        <p><strong>Family:</strong> Solanaceae</p>
+        <p><strong>Parts Used:</strong> Roots, leaves, berries</p>
+        <p><strong>Medicinal Uses:</strong> Adaptogen, rejuvenative, immunity booster.</p>
+        <p><strong>Benefits:</strong> Reduces stress, improves vitality, supports sleep & memory.</p>
+        <p><strong>Precautions:</strong> Avoid in pregnancy; may interact with thyroid or BP medicines.</p>
+        <p><strong>Rasa:</strong> Bitter, astringent, sweet</p>
+        <p><strong>Guna:</strong> Light, unctuous</p>
+        <p><strong>Virya:</strong> Heating</p>
+        <p><strong>Vipaka:</strong> Sweet</p>
+        <p><strong>Dosha Effect:</strong> Balances Vata and Kapha</p>
+        <img src="../images/ashwagandha.jpg" alt="Ashwagandha plant">
+      </div>
+    </div>
+
+    <!-- Parts Used -->
+    <div class="plant-parts">
+      <h3>Parts Used</h3>
+      <div class="parts-images">
+        <a href="#root"><img src="../images/ashwagandha_roots.jpg" alt="Ashwagandha Roots"></a>
+        <a href="#leaf"><img src="../images/ashwagandha_leaves.jpg" alt="Ashwagandha Leaves"></a>
+        <a href="#berry"><img src="../images/ashwagandha_berry.jpg" alt="Ashwagandha Berries"></a>
+      </div>
+    </div>
+
+    <!-- Detailed Info -->
+    <div class="detailed-display">
+      <!-- Root -->
+      <div id="root" class="root">
+        <div class="root-img">
+          <img src="../images/ashwagandha_roots.jpg" alt="Ashwagandha Roots">
+          <img src="../images/ashwagandha_root_struct.png" alt="Internal structure of Ashwagandha Root">
+        </div>
+        <div class="root-info">
+          <h2>Ashwagandha Roots</h2>
+          <p>The roots of Ashwagandha are the most important medicinal part, widely used in Ayurveda, Siddha, and modern
+            herbal medicine.</p>
+          <h3>Morphology</h3>
+          <ul>
+            <li>Taproot, stout, fleshy, cylindrical, up to 20–30 cm long.</li>
+            <li>Whitish-brown externally, whitish inside.</li>
+            <li>Odor: horse-like; Taste: bitter and pungent.</li>
+          </ul>
+
+          <h3>Microscopic Features</h3>
+          <ul>
+            <li>Cork with reddish-brown cells.</li>
+            <li>Cortex of parenchymatous cells filled with starch grains and calcium oxalate crystals.</li>
+            <li>Xylem vessels with spiral and reticulate thickenings.</li>
+            <li>Uniseriate medullary rays connecting cortex and xylem.</li>
+          </ul>
+
+          <h3>Chemical Constituents</h3>
+          <p>Withanolides (Withaferin A, D), alkaloids (somniferine, withanine), saponins, starch, iron, and amino
+            acids.</p>
+
+          <h3>Medicinal Properties</h3>
+          <ul>
+            <li>Adaptogen and stress reliever.</li>
+            <li>Rejuvenative and vitality booster.</li>
+            <li>Anti-inflammatory, anti-arthritic, and nervine tonic.</li>
+            <li>Improves sleep and immunity.</li>
+          </ul>
+
+          <h3>Uses</h3>
+          <p>Traditionally used as powder (churna) with milk; applied externally for wounds and arthritis; modern
+            extracts used in supplements.</p>
+        </div>
+      </div>
+
+      <!-- Leaf -->
+      <div id="leaf" class="leaf">
+        <div class="leaf-img">
+          <img src="../images/ashwagandha_leaves.jpg" alt="Ashwagandha Leaves">
+          <img src="../images/ashwagandha_leaf_struct.png" alt="Internal structure of Ashwagandha Leaf">
+        </div>
+        <div class="leaf-info">
+          <h2>Ashwagandha Leaves</h2>
+          <p>Ashwagandha leaves are bitter in taste and used traditionally for fever, swelling, and infections.</p>
+          <h3>Morphology</h3>
+          <ul>
+            <li>Simple, ovate, 5–10 cm long, green leaves with short petioles.</li>
+            <li>Margins entire, surface covered with fine hairs (trichomes).</li>
+            <li>Arrangement alternate.</li>
+          </ul>
+
+          <h3>Microscopic Features</h3>
+          <ul>
+            <li>Upper and lower epidermis with anisocytic stomata.</li>
+            <li>Mesophyll differentiated into palisade and spongy parenchyma.</li>
+            <li>Glandular trichomes secreting withanolides.</li>
+            <li>Vascular bundles collateral, xylem above, phloem below.</li>
+          </ul>
+
+          <h3>Chemical Constituents</h3>
+          <p>Rich in withaferin A, flavonoids, tannins, and iron. Leaves contain higher withanolide concentration than
+            roots.</p>
+
+          <h3>Medicinal Properties</h3>
+          <ul>
+            <li>Antibacterial and antifungal activity.</li>
+            <li>Anti-inflammatory and analgesic effect.</li>
+            <li>Promotes wound healing when applied externally.</li>
+            <li>Used in fever reduction and detoxification therapies.</li>
+          </ul>
+
+          <h3>Uses</h3>
+          <p>Applied as a paste for skin infections, wounds, and swelling; decoction used in traditional medicine for
+            fever and cough; extract used in research for anticancer activity.</p>
+        </div>
+      </div>
+
+      <!-- Berry -->
+      <div id="berry" class="berry">
+        <div class="berry-img">
+          <img src="../images/ashwagandha_berry.jpg" alt="Ashwagandha Berries">
+          <img src="../images/ashwagandha_berry_struct.png" alt="Internal structure of Ashwagandha Berry">
+        </div>
+        <div class="berry-info">
+          <h2>Ashwagandha Berries</h2>
+          <p>The berries are orange-red when ripe and are used in Ayurvedic medicine for female reproductive health and
+            as a diuretic.</p>
+          <h3>Morphology</h3>
+          <ul>
+            <li>Globose berries, 5–8 mm in diameter.</li>
+            <li>Initially green, ripening to orange-red.</li>
+            <li>Each berry enclosed in a persistent papery calyx.</li>
+            <li>Contains numerous small, yellow seeds.</li>
+          </ul>
+
+          <h3>Microscopic Features</h3>
+          <ul>
+            <li>Pericarp of parenchymatous cells with pigment granules.</li>
+            <li>Seeds with outer testa (seed coat) and endosperm rich in proteins and oils.</li>
+            <li>Presence of carotenoid pigments.</li>
+          </ul>
+
+          <h3>Chemical Constituents</h3>
+          <p>Contain withanolides, alkaloids, flavonoids, saponins, and carotenoids (responsible for red-orange color).
+          </p>
+
+          <h3>Medicinal Properties</h3>
+          <ul>
+            <li>Mild purgative and diuretic effect.</li>
+            <li>Antioxidant activity due to carotenoids.</li>
+            <li>Supports reproductive health and hormonal balance.</li>
+          </ul>
+
+          <h3>Uses</h3>
+          <p>Berries are used in Siddha and folk medicine as aphrodisiacs, diuretics, and tonics. Seeds are sometimes
+            powdered and used in formulations for vitality and fertility.</p>
+        </div>
+      </div>
+
+
+    </div>
+  </main>
+</body>
+
+</html>

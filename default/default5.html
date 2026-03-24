@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Default Page</title>
+<style>
+  * {
+    margin: 2;
+    padding: 5;
+    box-sizing: border-box;
+  }
+
+  body, html {
+    width: 98%;
+    height: 95%;
+    font-family: Arial, sans-serif;
+    background-color: #f7ebd1;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+  }
+
+  /* Upper half with image */
+  .upper-half {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* image sticks to top */
+    padding: 10;
+  }
+
+  .upper-half img {
+    width: 95%;
+    max-height: 40vh; /* image takes max half of viewport */
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+
+  /* Lower half with text */
+  .lower-half {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* stick text to top */
+    padding: 0;
+    flex: 1; /* remaining space is for text box */
+  }
+
+  .text-box {
+    width: 95%;
+    height: 100%;
+    background-color: rgba(254, 255, 235, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .text-box {
+      font-size: 1.1rem;
+      padding: 12px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .upper-half img {
+      max-height: 40vh;
+    }
+    .text-box {
+      height: 70%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Upper half with image -->
+  <div class="upper-half">
+    <img src="../images/default5.png" alt="Upper Image">
+  </div>
+
+  <!-- Lower half with text -->
+  <div class="lower-half">
+    <div class="text-box">
+      <h2>Welcome to the virtual garden </h2>
+      <p>Homeopathy, a vital component of AYUSH, is a gentle, natural system of medicine founded on the principle of “like cures like.” It works by stimulating the body’s own healing power to restore balance and health. Homeopathy uses highly diluted natural substances derived from plants, minerals, and animals, which are prepared through a scientific process known as potentization. These remedies are safe, non-toxic, and free from side effects, making them suitable for people of all ages, including children and the elderly. The image reflects the simplicity and purity of homeopathy, where fresh herbs and natural extracts are prepared carefully to form healing medicines. Unlike conventional treatments that often suppress symptoms, homeopathy addresses the root cause of illness and provides long-term relief. It is widely used to manage chronic conditions such as allergies, skin diseases, migraines, respiratory issues, and digestive disorders. With its individualized approach, where each patient’s unique symptoms and constitution are considered, homeopathy continues to gain trust worldwide as an effective, holistic, and sustainable system of healthcare.
+
+
+
+.</p>
+      <p></p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

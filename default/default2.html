@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Default Page</title>
+<style>
+  * {
+    margin: 2;
+    padding: 5;
+    box-sizing: border-box;
+  }
+
+  body, html {
+    width: 98%;
+    height: 95%;
+    font-family: Arial, sans-serif;
+    background-color: #f7ebd1;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+  }
+
+  /* Upper half with image */
+  .upper-half {
+    display: flex;
+    justify-content:center;
+    align-items: flex-start; /* image sticks to top */
+    padding: 10;
+  }
+
+  .upper-half img {
+    width: 95%;
+    max-height: 32vh; /* image takes max half of viewport */
+    object-fit:cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+
+  /* Lower half with text */
+  .lower-half {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* stick text to top */
+    padding: 0;
+    flex: 1; /* remaining space is for text box */
+  }
+
+  .text-box {
+    width: 95%;
+    height: 100%;
+    background-color: rgba(254, 255, 235, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .text-box {
+      font-size: 1.1rem;
+      padding: 12px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .upper-half img {
+      max-height: 40vh;
+    }
+    .text-box {
+      height: 70%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Upper half with image -->
+  <div class="upper-half">
+    <img src="../images/default2.png" alt="Upper Image">
+  </div>
+
+  <!-- Lower half with text -->
+  <div class="lower-half">
+    <div class="text-box">
+      <h2>Welcome to the virtual garden </h2>
+      <p>Siddha Medicine, an ancient system of healing and a vital part of AYUSH, has its origins in Tamil Nadu and is believed to be one of the world’s oldest medical traditions. Rooted in the wisdom of the Siddhars (spiritual saints), this system focuses on maintaining harmony between the body, mind, and soul. Siddha practices are deeply connected with nature and rely on the therapeutic use of herbs, minerals, and animal products prepared with precise methods. The image reflects Siddha’s holistic approach, showcasing natural ingredients such as turmeric, amla, cardamom, black pepper, medicinal leaves, and oils, all traditionally arranged on a banana leaf. Siddha medicine is particularly renowned for its strength in managing chronic illnesses, skin diseases, arthritis, and lifestyle disorders through long-lasting remedies. In addition to medicines, it emphasizes diet, yoga, meditation, and lifestyle regulation as essential components of healing. Unlike many modern practices, Siddha places strong emphasis on preventive care and rejuvenation, aiming not just for cure but for enhanced vitality and spiritual well-being. Even today, Siddha continues to thrive as a sustainable and natural healthcare system, offering holistic solutions that blend ancient knowledge with modern healthcare needs.
+
+.</p>
+      <p></p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

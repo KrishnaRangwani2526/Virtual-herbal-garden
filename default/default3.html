@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Default Page</title>
+<style>
+  * {
+    margin: 2;
+    padding: 5;
+    box-sizing: border-box;
+  }
+
+  body, html {
+    width: 98%;
+    height: 95%;
+    font-family: Arial, sans-serif;
+    background-color: #f7ebd1;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+  }
+
+  /* Upper half with image */
+  .upper-half {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* image sticks to top */
+    padding: 10;
+  }
+
+.upper-half img {
+  width: 95%;
+  max-height: 50vh; /* image takes max half of viewport */
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  margin-bottom: 15px; /* ✅ space below image */
+}
+
+.lower-half {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+  flex: 1;
+}
+
+  .text-box {
+    width: 95%;
+    height: 100%;
+    background-color: rgba(254, 255, 235, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .text-box {
+      font-size: 1.1rem;
+      padding: 12px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .upper-half img {
+      max-height: 40vh;
+    }
+    .text-box {
+      height: 70%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Upper half with image -->
+  <div class="upper-half">
+    <img src="../images/default3.png" alt="Upper Image">
+  </div>
+
+  <!-- Lower half with text -->
+  <div class="lower-half">
+    <div class="text-box">
+      <h2>Welcome to the virtual garden </h2>
+      <p>Ayurveda, often called the “Science of Life,” is the foundation of India’s traditional healthcare system and one of the core pillars of AYUSH. With origins dating back more than 5,000 years, Ayurveda is based on the principle of maintaining balance between the body, mind, and spirit to ensure overall well-being. It classifies individuals into three doshas – Vata, Pitta, and Kapha – and prescribes customized treatments, diets, and lifestyle practices according to each person’s constitution. The image reflects Ayurveda’s rich essence, showcasing natural herbs, medicinal powders, roots, oils, and decoctions prepared through traditional methods. Unlike modern medicine that often focuses on symptom management, Ayurveda emphasizes prevention, immunity-building, detoxification, and rejuvenation therapies such as Panchakarma. From herbal medicines and dietary guidance to yoga, meditation, and massage therapies, Ayurveda offers a holistic and sustainable approach to healthcare. Today, Ayurveda is recognized globally as a safe and natural system of medicine that not only treats chronic illnesses but also promotes longevity, vitality, and harmony with nature.
+
+.</p>
+      <p></p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

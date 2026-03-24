@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <title>Tulsi</title>
+  <style>
+    /* 🌿 Classy Herbal Garden Styles 🌿 */
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ------------------- Reset & Base ------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f3f9f4, #fdfdfd);
+      color: #333;
+      line-height: 1.7;
+    }
+
+    /* ------------------- Header ------------------- */
+    header {
+      background: linear-gradient(90deg, #2c6e49, #4caf50);
+      color: white;
+      padding: 25px 0;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ------------------- Plant Display ------------------- */
+    .plant-display {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 30px;
+      margin: 0 auto;
+    }
+
+    /* 3D Model */
+    .plant-3d {
+      flex: 0 0 45%;
+      min-width: 300px;
+      padding: 20px;
+      border-radius: 20px;
+      background: #ffffff;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      transition: transform 0.3s;
+    }
+
+    .plant-3d:hover {
+      transform: scale(1.02);
+    }
+
+    .plant-3d model-viewer {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+    }
+
+    /* Info Card */
+    .plant-info {
+      flex: 0 0 45%;
+      min-width: 300px;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      transition: transform 0.3s;
+    }
+
+    .plant-info:hover {
+      transform: translateY(-5px);
+    }
+
+    .plant-info h2 {
+      margin-bottom: 20px;
+      color: #2c6e49;
+      border-left: 5px solid #4CAF50;
+      padding-left: 10px;
+    }
+
+    .plant-info p {
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    .plant-info img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-top: 20px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ------------------- Parts Images ------------------- */
+    .plant-parts {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .plant-parts h3 {
+      color: #2c6e49;
+      font-size: 1.6rem;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .plant-parts h3::after {
+      content: "";
+      display: block;
+      width: 50%;
+      height: 3px;
+      background: #4CAF50;
+      margin: 8px auto 0;
+      border-radius: 3px;
+    }
+
+    .parts-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 70px;
+      justify-content: center;
+    }
+
+    .parts-images a img {
+      width: 230px;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      transition: transform 0.4s, box-shadow 0.4s;
+      cursor: pointer;
+    }
+
+    .parts-images a img:hover {
+      transform: scale(1.50);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ------------------- Detailed Display ------------------- */
+    .detailed-display {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding: 30px;
+      margin: 0 auto;
+      max-width: 1300px;
+    }
+
+    /* Individual Sections */
+    .root,
+    .leaf,
+    .seed {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .root-img,
+    .leaf-img,
+    .seed-img {
+      flex: 0 0 30%;
+      min-width: 300px;
+      padding: 10px;
+    }
+    .leaf-img,.seed-img,.root-img img:nth-child(2) {
+  position: relative;
+  top: 50px;
+
+}
+
+    .root-img img,
+    .leaf-img img,
+    .seed-img img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      margin-bottom: 15px;
+    }
+
+    .root-info,
+    .leaf-info,
+    .seed-info {
+      flex: 0 0 60%;
+      min-width: 300px;
+      padding: 20px;
+    }
+
+    .root-info h2,
+    .leaf-info h2,
+    .seed-info h2 {
+      margin-bottom: 15px;
+      color: #2c6e49;
+      border-bottom: 2px solid #4CAF50;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .root-info h3,
+    .leaf-info h3,
+    .seed-info h3 {
+      margin: 15px 0 8px;
+      color: #4CAF50;
+      font-size: 1.2rem;
+    }
+
+    .root-info p,
+    .leaf-info p,
+    .seed-info p,
+    .root-info ul,
+    .leaf-info ul,
+    .seed-info ul {
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    ul {
+      padding-left: 20px;
+      list-style-type: "🌱 ";
+    }
+
+    .page-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 150px;
+      /* space between the two buttons */
+      margin: 40px 0;
+    }
+
+    .fancy-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #43a047, #66bb6a, #81c784);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.3rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), inset 0 0 10px rgba(255, 255, 255, 0.2);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .fancy-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: skewX(-20deg);
+      transition: 0.5s;
+    }
+
+    .fancy-btn:hover::before {
+      left: 100%;
+    }
+
+    .fancy-btn:hover {
+      background: linear-gradient(135deg, #2e7d32, #43a047, #66bb6a);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 0 15px rgba(255, 255, 255, 0.25);
+    }
+
+
+
+    /* ------------------- Responsive ------------------- */
+    @media (max-width: 900px) {
+      .plant-display {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .plant-3d,
+      .plant-info {
+        flex: 0 0 90%;
+        margin-bottom: 20px;
+      }
+
+      .root,
+      .leaf,
+      .seed {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .root-img img,
+      .leaf-img img,
+      .seed-img img {
+        height: 300px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Tulsi</h1>
+  </header>
+
+  <main>
+    <!-- Plant Display -->
+    <div class="plant-display">
+      <div class="plant-3d">
+        <model-viewer src="../images/tulsi.glb" alt="3D model of Tulsi" auto-rotate camera-controls ar>
+        </model-viewer>
+      </div>
+
+      <div class="plant-info">
+        <p><strong>Scientific Name:</strong> <span>Ocimum sanctum</span></p>
+        <p><strong>Common Names:</strong> <span>Holy Basil, Sacred Basil</span></p>
+        <p><strong>Family:</strong> <span>Lamiaceae</span></p>
+        <p><strong>Parts Used:</strong>Leaves, seeds, roots<span></span></p>
+        <p><strong>Medicinal Uses:</strong>Respiratory health, immunity booster, adaptogen. <span></span></p>
+        <p><strong>Benefits:</strong> <span>Clears respiratory tract, boosts vitality, reduces stress.</span></p>
+        <p><strong>Precautions:</strong> <span>Excess may aggravate Pitta (heat, acidity).</span></p>
+        <p><strong>Rasa:</strong> <span>Bitter, pungent</span></p>
+        <p><strong>Guna:</strong> <span>Light, dry</span></p>
+        <p><strong>Virya:</strong> <span>Heating</span></p>
+        <p><strong>Vipaka:</strong> <span>Pungent</span></p>
+        <p><strong>Dosha Effect:</strong> <span>Balances Vata and Kapha,may increase Pitta</span></p>
+        <img src="../images/tulsi.jpeg" alt="Tulsi plant"></img>
+      </div>
+    </div>
+
+    <!-- Parts Used -->
+    <div class="plant-parts">
+      <h3>Parts Used</h3>
+      <div class="parts-images">
+        <a href="#leaf"><img src="../images/tulsi_leaves.jpg" alt="Tulsi leaves"></a>
+        <a href="#root"><img src="../images/tulsi_root.jpeg" alt="Tulsi roots"></a>
+        <a href="#seed"><img src="../images/tulsi_seeds.jpg" alt="Tulsi seeds"></a>
+      </div>
+    </div>
+    <!-- Detailed Info -->
+<div class="detailed-display">
+  <!-- Root -->
+  <div id="root" class="root">
+    <div class="root-img">
+      <img src="../images/tulsi_root.jpeg" alt="Tulsi Roots">
+      <img src="../images/tulsi_root_sturct.png" alt="Internal structure of Tulsi Root">
+    </div>
+    <div class="root-info">
+      <h2>Tulsi Roots</h2>
+      <p>The roots of Tulsi are aromatic and contribute to the medicinal qualities of the plant, though less used than leaves and seeds.</p>
+      
+      <h3>Morphology</h3>
+      <ul>
+        <li>Taproot system, slender, branched, and fibrous.</li>
+        <li>Brownish externally, whitish internally.</li>
+        <li>Aromatic odor; taste slightly bitter and pungent.</li>
+      </ul>
+
+      <h3>Microscopic Features</h3>
+      <ul>
+        <li>Cork with several layers of brownish cells.</li>
+        <li>Cortex of parenchymatous cells containing oil globules.</li>
+        <li>Xylem with spiral and reticulate vessels.</li>
+        <li>Medullary rays connecting cortex and vascular tissue.</li>
+      </ul>
+
+      <h3>Chemical Constituents</h3>
+      <p>Essential oils (eugenol, methyl eugenol, carvacrol), ursolic acid, flavonoids, and triterpenoids.</p>
+
+      <h3>Medicinal Properties</h3>
+      <ul>
+        <li>Antimicrobial and antifungal activity.</li>
+        <li>Adaptogenic and stress-relieving effect.</li>
+        <li>Anti-inflammatory and analgesic properties.</li>
+      </ul>
+
+      <h3>Uses</h3>
+      <p>Root decoction is used in traditional medicine for fever, skin diseases, and nervous disorders.</p>
+    </div>
+  </div>
+
+  <!-- Leaf -->
+  <div id="leaf" class="leaf">
+    <div class="leaf-img">
+      <img src="../images/tulsi_leaves.jpg" alt="Tulsi Leaves">
+      <img src="../images/tulsi_leaf_struct.png" alt="Internal structure of Tulsi Leaf">
+    </div>
+    <div class="leaf-info">
+      <h2>Tulsi Leaves</h2>
+      <p>The leaves are the most important medicinal part of Tulsi, widely used in Ayurveda for respiratory, digestive, and immune health.</p>
+      
+      <h3>Morphology</h3>
+      <ul>
+        <li>Simple, opposite, ovate leaves, 2–4 cm long.</li>
+        <li>Margins serrated, surface hairy.</li>
+        <li>Green or purplish depending on variety (Krishna Tulsi or Rama Tulsi).</li>
+        <li>Aromatic fragrance due to essential oils.</li>
+      </ul>
+
+      <h3>Microscopic Features</h3>
+      <ul>
+        <li>Upper and lower epidermis with glandular trichomes.</li>
+        <li>Stomata diacytic type.</li>
+        <li>Mesophyll differentiated into palisade and spongy parenchyma.</li>
+        <li>Oil glands secreting eugenol and other volatile oils.</li>
+      </ul>
+
+      <h3>Chemical Constituents</h3>
+      <p>Essential oils (eugenol, methyl chavicol, linalool), flavonoids, tannins, and vitamin C.</p>
+
+      <h3>Medicinal Properties</h3>
+      <ul>
+        <li>Antimicrobial, antifungal, and antiviral.</li>
+        <li>Immunity booster and adaptogen.</li>
+        <li>Anti-inflammatory and antioxidant.</li>
+        <li>Relieves cough, cold, and asthma.</li>
+      </ul>
+
+      <h3>Uses</h3>
+      <p>Fresh leaves chewed for immunity; decoction used for cough, fever, and digestive issues; paste applied externally for skin infections.</p>
+    </div>
+  </div>
+
+  <!-- Seeds -->
+  <div id="seed" class="seed">
+    <div class="seed-img">
+      <img src="../images/tulsi_seeds.jpg" alt="Tulsi Seeds">
+      <img src="../images/tulsi_seed_struct.png" alt="Internal structure of Tulsi seed">
+    </div>
+    <div class="seed-info">
+      <h2>Tulsi Seeds (Sabja Seeds)</h2>
+      <p>Tulsi seeds, also called Sabja or Basil seeds, are cooling in nature and used in Ayurveda for digestion and pitta balance.</p>
+      
+      <h3>Morphology</h3>
+      <ul>
+        <li>Small, black, oval-shaped seeds.</li>
+        <li>Swells and becomes mucilaginous when soaked in water.</li>
+        <li>Odorless and tasteless.</li>
+      </ul>
+
+      <h3>Microscopic Features</h3>
+      <ul>
+        <li>Seed coat with mucilage cells.</li>
+        <li>Endosperm rich in fixed oil and protein.</li>
+        <li>Embryo curved within the endosperm.</li>
+      </ul>
+
+      <h3>Chemical Constituents</h3>
+      <p>Mucilage (polysaccharides), fixed oils (linoleic acid, oleic acid), proteins, flavonoids, and essential oils.</p>
+
+      <h3>Medicinal Properties</h3>
+      <ul>
+        <li>Cooling and soothing effect on digestive system.</li>
+        <li>Demulcent and anti-ulcer properties.</li>
+        <li>Helps in weight management and blood sugar control.</li>
+      </ul>
+
+      <h3>Uses</h3>
+      <p>Consumed soaked in water or milk as a coolant; used in Ayurveda for acidity, constipation, and urinary disorders; added to beverages like falooda and sherbets.</p>
+    </div>
+  </div>
+
+  <div class="page-buttons">
+    <a href="../extras/lab.html" class="fancy-btn">🧪Go to Herbal Lab</a>
+    <a href="../background.html" class="fancy-btn">🌱 Back to Farm</a>
+  </div>
+</div>
+  </main>
+</body>
+
+</html>

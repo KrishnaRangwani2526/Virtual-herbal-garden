@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aloe Vera</title>
+    <link rel="stylesheet" href="../style.css">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        .page-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 150px;
+            margin: 40px 0;
+        }
+
+        .fancy-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #43a047, #66bb6a, #81c784);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .fancy-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: skewX(-20deg);
+            transition: 0.5s;
+        }
+
+        .fancy-btn:hover::before {
+            left: 100%;
+        }
+
+        .fancy-btn:hover {
+            background: linear-gradient(135deg, #2e7d32, #43a047, #66bb6a);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 0 15px rgba(255, 255, 255, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <div id="outer">
+        <div id="model">
+            <model-viewer src="../images/aloevera.glb" alt="3D model" 
+            auto-rotate camera-controls ar 
+             style="width: 100%; height: 100%; object-fit: contain;" >
+        </model-viewer>
+        </div>
+
+        <div id="text-box1">
+            <p><strong>Scientific Name:</strong> Aloe barbadensis miller</p>
+            <p><strong>Common Names:</strong> Aloe Vera, Ghritkumari</p>
+            <p><strong>Family:</strong> Asphodelaceae</p>
+            <p><strong>Parts Used:</strong> Leaves, gel</p>
+            <p><strong>Rasa:</strong> Bitter</p>
+            <p><strong>Guna:</strong> Heavy, unctuous</p>
+            <p><strong>Virya:</strong> Cooling</p>
+            <p><strong>Vipaka:</strong> Sweet</p>
+            <p><strong>Dosha Effect:</strong> Pacifies Pitta, may increase Kapha</p>
+        </div>   
+        <div id="text-box2">
+            <p><strong>Medicinal Uses:</strong> Wound healing, burns, skin conditions</p>
+            <p><strong>Benefits:</strong> Anti-inflammatory, moisturizing, digestive aid</p>
+            <p><strong>Precautions:</strong> Avoid in pregnancy; not for internal use in high doses</p>
+        </div>   
+    </div>
+
+    <div class="page-buttons">
+        <a href="../extras/lab.html" class="fancy-btn">🧪Go to Herbal Lab</a>
+        <a href="../background.html" class="fancy-btn">🌱 Back to Farm</a>
+    </div>
+</body>
+</html>
