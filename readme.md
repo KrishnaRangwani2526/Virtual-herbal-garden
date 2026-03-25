@@ -108,6 +108,7 @@ cd virtual-herbal-garden
 ### Ayurveda Interface
 ![Ayurveda garden](images/Ayurveda garden.png)
 
+
 ---
 
 ## 📄 License
