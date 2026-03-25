@@ -101,9 +101,9 @@ cd virtual-herbal-garden
 
 ## 📷 Preview
 
-![Preview](image.png)
-![Preview](image-2.png)
-![Preview](image-1.png)
+![Main indterface ](image.png)
+![Lab interface](image-2.png)
+![Ayurveda garden](image-1.png)
 
 ---
 
